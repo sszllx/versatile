@@ -6,6 +6,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QIcon>
+
 class QJsonModel : public QAbstractItemModel
 {
     Q_OBJECT
@@ -22,15 +23,11 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     void setIcon(const QJsonValue::Type& type, const QIcon& icon);
 
-
-
 private:
     QJsonTreeItem * mRootItem;
     QJsonDocument mDocument;
     QStringList mHeaders;
     QHash<QJsonValue::Type, QIcon> mTypeIcons;
-
-
 };
 
 #endif // QJSONMODEL_H

@@ -34,8 +34,6 @@ private:
 
     QList<QJsonTreeItem*> mChilds;
     QJsonTreeItem * mParent;
-
-
 };
 
 #endif // JSONITEM_H

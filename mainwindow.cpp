@@ -80,6 +80,7 @@ void MainWindow::newFile()
 
 MdiChild* MainWindow::createMdiChild()
 {
+    // TODO: singleton model
     MdiChild *child = new MdiChild;
     mdiArea->addSubWindow(child);
 

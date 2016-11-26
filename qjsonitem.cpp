@@ -93,41 +93,29 @@ QJsonValue::Type QJsonTreeItem::type() const
 
 QJsonTreeItem* QJsonTreeItem::load(const QJsonValue& value, QJsonTreeItem* parent)
 {
-
-
     QJsonTreeItem * rootItem = new QJsonTreeItem(parent);
     rootItem->setKey("root");
 
-    if ( value.isObject())
-    {
-
+    if ( value.isObject()) {
         //Get all QJsonValue childs
-        foreach (QString key , value.toObject().keys()){
+        foreach (QString key , value.toObject().keys()) {
             QJsonValue v = value.toObject().value(key);
             QJsonTreeItem * child = load(v,rootItem);
             child->setKey(key);
             child->setType(v.type());
             rootItem->appendChild(child);
-
         }
-
-    }
-
-    else if ( value.isArray())
-    {
+    } else if (value.isArray()) {
         //Get all QJsonValue childs
         int index = 0;
-        foreach (QJsonValue v , value.toArray()){
-
+        foreach (QJsonValue v , value.toArray()) {
             QJsonTreeItem * child = load(v,rootItem);
             child->setKey(QString::number(index));
             child->setType(v.type());
             rootItem->appendChild(child);
             ++index;
         }
-    }
-    else
-    {
+    } else {
         rootItem->setValue(value.toVariant().toString());
         rootItem->setType(value.type());
     }

@@ -31,8 +31,6 @@ QJsonModel::QJsonModel(QObject *parent) :
     mRootItem = new QJsonTreeItem;
     mHeaders.append("key");
     mHeaders.append("value");
-
-
 }
 
 bool QJsonModel::load(const QString &fileName)
@@ -71,25 +69,18 @@ bool QJsonModel::loadJson(const QByteArray &json)
     return false;
 }
 
-
 QVariant QJsonModel::data(const QModelIndex &index, int role) const
 {
-
     if (!index.isValid())
         return QVariant();
 
-
     QJsonTreeItem *item = static_cast<QJsonTreeItem*>(index.internalPointer());
 
-
-    if ((role == Qt::DecorationRole) && (index.column() == 0)){
-
+    if ((role == Qt::DecorationRole) && (index.column() == 0)) {
         return mTypeIcons.value(item->type());
     }
 
-
     if (role == Qt::DisplayRole) {
-
         if (index.column() == 0)
             return QString("%1").arg(item->key());
 
@@ -97,10 +88,7 @@ QVariant QJsonModel::data(const QModelIndex &index, int role) const
             return QString("%1").arg(item->value());
     }
 
-
-
     return QVariant();
-
 }
 
 QVariant QJsonModel::headerData(int section, Qt::Orientation orientation, int role) const

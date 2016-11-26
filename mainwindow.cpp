@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     createActions();
 
-    setGeometry(10, 800, 800, 800);
+    setGeometry(10, 800, 1000, 800);
 }
 
 MainWindow::~MainWindow()
@@ -90,6 +90,10 @@ MdiChild* MainWindow::createMdiChild()
 void MainWindow::onPullTopic()
 {
     QMdiSubWindow *activeWin = mdiArea->activeSubWindow();
+    if (activeWin == NULL) {
+        return;
+    }
+
     QString title = activeWin->windowTitle();
 
     if (title != "sm") {
@@ -105,7 +109,7 @@ void MainWindow::createActions()
     mVerMenu = menuBar()->addMenu(tr("&Versatile"));
     connect(mVerMenu, &QMenu::aboutToShow, this, &MainWindow::updateVerMenu);
 
-    mExchangeAct = new QAction(QIcon(), tr("&exchange"), this);
+    mExchangeAct = new QAction(QIcon(), tr("&Exchange"), this);
     connect(mExchangeAct, &QAction::triggered, this, &MainWindow::onNewExchange);
 
     mSMAct = new QAction(QIcon(), tr("&Sm"), this);
@@ -118,6 +122,9 @@ void MainWindow::createActions()
     mToolBar->addAction(mExchangeAct);
     mToolBar->addAction(mSMAct);
     mToolBar->addAction(mPullTopicAct);
+
+    // for test
+    onSM();
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)

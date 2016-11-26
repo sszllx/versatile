@@ -1,4 +1,7 @@
 *.o
 ui_*
+moc_*
+*.qm
+test.json
 Makefile
 versatile

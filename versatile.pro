@@ -24,8 +24,8 @@ SOURCES += main.cpp\
     sm/smwindow.cpp \
     sm/smobj.cpp \
     sm/smproject.cpp \
-    sm/treemodel.cpp \
-    sm/treeitem.cpp
+    qjsonmodel.cpp \
+    qjsonitem.cpp
 
 HEADERS  += mainwindow.h \
     httphelper.h \
@@ -34,7 +34,9 @@ HEADERS  += mainwindow.h \
     exchange/exchange_sub_win.h \
     sm/smwindow.h \
     sm/smproject.h \
-    sm/treemodel.h \
-    sm/treeitem.h
+    qjsonmodel.h \
+    qjsonitem.h
 
 FORMS    += mainwindow.ui
+TRANSLATIONS = translation/versatile.ts
+

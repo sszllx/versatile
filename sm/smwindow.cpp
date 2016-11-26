@@ -1,6 +1,7 @@
 #include "smwindow.h"
 #include "smproject.h"
 #include "smobj.h"
+#include "../qjsonmodel.h"
 
 #include <QtWidgets>
 #include <QUuid>
@@ -23,9 +24,16 @@ void SMWindow::initUI()
     QWidget *main_widget = new QWidget(this);
     setWidget(main_widget);
     QVBoxLayout *main_layout = new QVBoxLayout(main_widget);
-    //     mEditor = new QTextEdit(this);
 
+    QSplitter *content_splitter = new QSplitter(this);
+    content_splitter->setOrientation(Qt::Horizontal);
+
+    mJsonModel = new QJsonModel(this);
+    mTreeview = new QTreeView(main_widget);
+    mTreeview->setModel(mJsonModel);
     mWebEngineView = new QWebEngineView(main_widget);
+    content_splitter->addWidget(mTreeview);
+    content_splitter->addWidget(mWebEngineView);
 
     QHBoxLayout *btn_layout = new QHBoxLayout(main_widget);
     QPushButton *qa_btn = new QPushButton("Insert Q&A");
@@ -35,13 +43,17 @@ void SMWindow::initUI()
     connect(mUrlEditor, &QLineEdit::returnPressed, this, &SMWindow::onLoadUrl);
     btn_layout->addWidget(mUrlEditor);
 
-    //    QPushButton *load_btn = new QPushButton("Load");
-    //    connect(load_btn, &QPushButton::clicked, this, &SMWindow::onLoadUrl);
-    //    btn_layout->addWidget(load_btn);
-
-    // main_layout->addWidget(mEditor);
-    main_layout->addWidget(mWebEngineView);
+    //    main_layout->addWidget(mWebEngineView);
+    //    main_layout->addLayout(content_layout);
+    main_layout->addWidget(content_splitter);
     main_layout->addLayout(btn_layout);
+
+    // for test
+    QFile file("./test/test.json");
+    file.open(QIODevice::ReadOnly);
+    QTextStream out(&file);
+    QString data = out.readAll();
+    mJsonModel->loadJson(data.toLocal8Bit());
 }
 
 void SMWindow::onAddItem()
@@ -68,6 +80,10 @@ void SMWindow::onLoadUrl()
 
 void SMWindow::addTopic()
 {
+    if (mWebEngineView == NULL) {
+        return;
+    }
+
     QString selectText = mWebEngineView->selectedText();
 
     if (selectText.isEmpty()) {
@@ -94,7 +110,6 @@ void SMWindow::addTopic()
         return;
     }
 
-    
 }
 
 void SMWindow::keyPressEvent(QKeyEvent *event)

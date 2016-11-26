@@ -6,6 +6,7 @@
 
 class QWebEngineView;
 class SMProject;
+class QJsonModel;
 
 class SMWindow : public QMdiSubWindow
 {
@@ -25,12 +26,12 @@ class SMWindow : public QMdiSubWindow
  private:
     void initUI();
 
-    QTextEdit *mEditor;
     QLineEdit *mUrlEditor;
     QWebEngineView *mWebEngineView;
     QSharedPointer<SMProject> mCurrentProject;
 
     QTreeView *mTreeview;
+    QJsonModel *mJsonModel;
 };
 
 #endif // SMWINDOW_H

@@ -97,7 +97,6 @@ QVariant QJsonModel::headerData(int section, Qt::Orientation orientation, int ro
         return QVariant();
 
     if (orientation == Qt::Horizontal) {
-
         return mHeaders.value(section);
     }
     else

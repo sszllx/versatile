@@ -46,7 +46,13 @@ void SMWindow::initUI()
     main_layout->addWidget(content_splitter);
     main_layout->addLayout(btn_layout);
 
-    //    mJsonModel->loadJson(data.toLocal8Bit());
+#if 1
+    QFile file("./test/test.json");
+    file.open(QIODevice::ReadOnly);
+    QTextStream out(&file);
+    QString data = out.readAll();
+    mJsonModel->loadJson(data.toLocal8Bit());
+#endif
 }
 
 void SMWindow::onAddItem()

@@ -43,17 +43,10 @@ void SMWindow::initUI()
     connect(mUrlEditor, &QLineEdit::returnPressed, this, &SMWindow::onLoadUrl);
     btn_layout->addWidget(mUrlEditor);
 
-    //    main_layout->addWidget(mWebEngineView);
-    //    main_layout->addLayout(content_layout);
     main_layout->addWidget(content_splitter);
     main_layout->addLayout(btn_layout);
 
-    // for test
-    QFile file("./test/test.json");
-    file.open(QIODevice::ReadOnly);
-    QTextStream out(&file);
-    QString data = out.readAll();
-    mJsonModel->loadJson(data.toLocal8Bit());
+    //    mJsonModel->loadJson(data.toLocal8Bit());
 }
 
 void SMWindow::onAddItem()

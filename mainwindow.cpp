@@ -122,5 +122,5 @@ void MainWindow::createActions()
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-
+    Q_UNUSED(event);
 }
